@@ -10,4 +10,9 @@ class HomeController
     {
         return $view->render('index.twig.html', []);
     }
+
+    public function show(Environment $view)
+    {
+        return $view->render('show.twig.html', []);
+    }
 }
