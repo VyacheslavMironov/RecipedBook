@@ -1,13 +1,18 @@
 <?php
 
+use Twig\Environment;
+
 require_once 'bootstrap.php';
 require_once 'src/controllers/HomeController.php';
 
-$homeController = new HomeController();
+// $homeController = new HomeController();
+// $container->get('MyClass');
+$container->set(Environment::class, $view);
+$container->set(HomeController::class, \DI\create(HomeController::class)->constructor($container->get(Environment::class)));
 
-$route->get('/', function () use($homeController, $view)
+$route->get('/', function () use($container)
 {
-    return $homeController->index($view);
+    return $container->get(HomeController::class)->index();
 });
 
 $route->get('/show', function () use($homeController, $view)
