@@ -12,13 +12,13 @@ class HomeController
     {
         $this->_view = $view;
     }
-    public function index(Environment $view)
+    public function index()
     {
-        return $view->render('index.twig.html', []);
+        return $this->_view->render('index.twig.html', []);
     }
 
-    public function show(Environment $view)
+    public function show()
     {
-        return $view->render('show.twig.html', []);
+        return $this->_view->render('show.twig.html', []);
     }
 }
