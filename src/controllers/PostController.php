@@ -11,6 +11,13 @@ class PostController
 
         $this->_db_connection = $db_connection;
     }
+
+    private function set_file(mixed $file)
+    {
+        $file_path = 'media/' . $file['name'];
+        move_uploaded_file($file['tmp_name'], $file_path);
+        return $file_path;
+    }
     
     public function create()
     {
@@ -21,7 +28,7 @@ class PostController
         return $query->execute([
             'title' => $_POST['title'],
             'description' => $_POST['description'],
-            'image' => ...
+            'image' => $this->set_file($_FILES['image'])
         ]);
     }
 }

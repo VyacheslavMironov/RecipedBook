@@ -39,7 +39,8 @@ $route->get('/create', function() use($container)
 
 $route->with('/post', function () use($route, $container){
     $route->post('/create', function () use($container){
-        return $container->get(PostController::class)->create();
+        $container->get(PostController::class)->create();
+        // header('Location: http://localhost/');
     });
 });
 
