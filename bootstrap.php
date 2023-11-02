@@ -4,7 +4,6 @@ use Klein\Klein;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 use DI\ContainerBuilder;
-use PDO;
 
 require_once 'vendor/autoload.php';
 

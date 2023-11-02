@@ -3,22 +3,23 @@
 use Twig\Environment;
 
 require_once 'vendor/autoload.php';
+require_once 'src/repository/recipedsRepository.php';
 
 class HomeController
 {
     private Environment $_view;
-    private PDO $_db_connection;
+    private RecipedsRepository $_repository;
 
-    public function __construct(Environment $view, PDO $db_connection)
+    public function __construct(Environment $view, RecipedsRepository $repository)
     {
         $this->_view = $view;
-        $this->_db_connection = $db_connection;
+        $this->_repository = $repository;
     }
     public function index()
     {
-        $recipeds = $this->_db_connection->query('SELECT * FROM recipeds;');
-        var_dump($recipeds);
-        return $this->_view->render('index.twig.html', []);
+        return $this->_view->render('index.twig.html', [
+            "recipeds" => $this->_repository->all()
+        ]);
     }
 
     public function show()

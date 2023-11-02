@@ -1,34 +1,25 @@
 <?php
 
 require_once 'vendor/autoload.php';
+require_once 'src/repository/recipedsRepository.php';
+require_once 'src/services/uploadFileService.php';
 
 class PostController
 {
-    private PDO $_db_connection;
+    private RecipedsRepository $_repository;
+    private UploadFileService $_service;
 
-    public function __construct(PDO $db_connection)
+    public function __construct(RecipedsRepository $repository, UploadFileService $service)
     {
 
-        $this->_db_connection = $db_connection;
-    }
-
-    private function set_file(mixed $file)
-    {
-        $file_path = 'media/' . $file['name'];
-        move_uploaded_file($file['tmp_name'], $file_path);
-        return $file_path;
+        $this->_repository = $repository;
+        $this->_service = $service;
     }
     
     public function create()
     {
-        $query = $this->_db_connection->prepare('
-            INSERT INTO recipeds(title, description, image)
-            VALUES(:title, :description, :image);
-        ');
-        return $query->execute([
-            'title' => $_POST['title'],
-            'description' => $_POST['description'],
-            'image' => $this->set_file($_FILES['image'])
+        return $this->_repository->create($_POST, [
+            "image" => $this->_service->set_file($_FILES['image'])
         ]);
     }
 }
