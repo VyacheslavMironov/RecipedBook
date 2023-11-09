@@ -4,6 +4,16 @@
 <div class="container mt-5">
     {% for reciped in reciped %}
         <div class="row">
+            <div class="row">
+                <div class="col-8"></div>
+                <div class="col-4 card p-1">
+                    <div class="d-flex justify-content-around">
+                        <p>Действие:</p>
+                        <a href="/edit?id={{ reciped['id'] }}" class="d-block btn btn-primary">Редактировать</a>
+                        <a href="#" class="d-block btn btn-danger">Удалить</a>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-6">
                 <img src="{{ reciped['image'] }}" alt="" class="img-fluid">
             </div>

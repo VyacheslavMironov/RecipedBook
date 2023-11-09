@@ -33,4 +33,11 @@ class HomeController
     {
         return $this->_view->render('create.twig.html', []);
     }
+
+    public function edit()
+    {
+        return $this->_view->render('edit.twig.html', [
+            'reciped' => $this->_repository->get($_GET['id'])
+        ]);
+    }
 }

@@ -49,10 +49,18 @@ $route->get('/create', function() use($container)
 {
     return $container->get(HomeController::class)->create();
 });
+$route->get('/edit', function() use($container)
+{
+    return $container->get(HomeController::class)->edit();
+});
 
 $route->with('/post', function () use($route, $container){
     $route->post('/create', function () use($container){
         $container->get(PostController::class)->create();
+        // header('Location: http://localhost/');
+    });
+    $route->post('/edit', function () use($container){
+        $container->get(PostController::class)->edit();
         // header('Location: http://localhost/');
     });
 });

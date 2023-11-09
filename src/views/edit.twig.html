@@ -1,0 +1,44 @@
+{% extends 'layouts/base.twig.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <form enctype="multipart/form-data"
+                action="/post/edit"
+                method="post">
+                {% for reciped in reciped %}
+                    <input type="hidden" name="id" value="{{ reciped['id'] }}">
+                    <div class="mb-3">
+                    <label for="exampleInputEmail1" 
+                        class="form-label">Заголовок</label>
+                    <input 
+                        type="text"
+                        name="title" 
+                        class="form-control" 
+                        id="exampleInputEmail1"
+                        value="{{ reciped['title'] }}">
+                    </div>
+                    <div class="mb-3">
+                    <label for="exampleInputPassword1" 
+                        class="form-label">Описание</label>
+                        <textarea name="description" 
+                            class="form-control" 
+                            cols="30" 
+                            rows="10">
+                            {{ reciped['description'] }}
+                        </textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" 
+                            class="form-label">Загрузите файл</label>
+                        <input type="file" 
+                            name="image" 
+                            class="form-control">
+                    </div>
+                {% endfor %}
+                <button type="submit" 
+                    class="btn btn-primary">Обновить</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
