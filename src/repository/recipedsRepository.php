@@ -29,4 +29,9 @@ class RecipedsRepository
     {
         return $this->_db_connection->query('SELECT * FROM recipeds;');
     }
+
+    public function get(int $id)
+    {
+        return $this->_db_connection->query("SELECT * FROM recipeds WHERE id={$id};");
+    }
 }

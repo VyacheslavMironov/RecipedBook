@@ -9,7 +9,7 @@ function create_table_recipeds()
     {
         return $db_connection->query('
             CREATE TABLE recipeds(
-                id INT AUTO INCREMENT PRIMARY KEY,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title VARCHAR NOT NULL UNIQUE, 
                 description TEXT NOT NULL,
                 image VARCHAR NOT NULL

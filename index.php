@@ -31,7 +31,7 @@ $container->set(HomeController::class,
 // Query Controllers
 $container->set(PostController::class, 
     \DI\create(PostController::class)->constructor(
-        $container->get(PDO::class),
+        $container->get(RecipedsRepository::class),
         $container->get(UploadFileService::class)
     )
 );
@@ -41,10 +41,10 @@ $route->get('/', function () use($container)
     return $container->get(HomeController::class)->index();
 });
 
-// $route->get('/show/id', function () use($homeController, $view)
-// {
-//     return $homeController->show($view);
-// });
+$route->get('/show', function () use($container)
+{
+    return $container->get(HomeController::class)->show();
+});
 $route->get('/create', function() use($container)
 {
     return $container->get(HomeController::class)->create();

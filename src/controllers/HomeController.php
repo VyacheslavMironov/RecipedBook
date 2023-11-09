@@ -24,7 +24,9 @@ class HomeController
 
     public function show()
     {
-        return $this->_view->render('show.twig.html', []);
+        return $this->_view->render('show.twig.html', [
+            'reciped' => $this->_repository->get($_GET['id'])
+        ]);
     }
 
     public function create()
