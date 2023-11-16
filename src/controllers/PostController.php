@@ -22,4 +22,10 @@ class PostController
             "image" => $this->_service->set_file($_FILES['image'])
         ]);
     }
+    public function edit()
+    {
+        echo $this->_repository->edit($_POST, [
+            "image" => strlen($_FILES['image']['name']) ? $this->_service->set_file($_FILES['image']) : ""
+        ]);
+    }
 }

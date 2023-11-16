@@ -34,4 +34,22 @@ class RecipedsRepository
     {
         return $this->_db_connection->query("SELECT * FROM recipeds WHERE id={$id};");
     }
+
+    public function edit(array $request, array $attachments)
+    {
+        $SQL = "UPDATE recipeds SET ";
+        $SQL .= "title=\"{$request['title']}\"";
+        $SQL .= ", description=\"" . trim($request['description']) . "\"";
+        if (strlen($attachments['image']) != 0)
+        {
+            $SQL .= ", image=\"{$attachments['image']}\" ";
+        }
+        $SQL .= " WHERE id={$request['id']};";
+        return $this->_db_connection->exec($SQL);
+    }
+
+    public function delete(int $id)
+    {
+        return $this->_db_connection->exec("DELETE FROM recipeds WHERE id={$id}");
+    }
 }
